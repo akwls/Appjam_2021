@@ -48,15 +48,17 @@
             android:hint="모집인원"
             android:padding="15dp"
             android:layout_marginTop="5dp"/>
-        <EditText
+        <Spinner
             android:id="@+id/category"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:textSize="14sp"
             android:textColor="#000"
-            android:gravity="center"
+            android:textAlignment="center"
             android:background="#fff"
             android:hint="카테고리"
+            android:popupBackground="#fff"
+            android:dropDownWidth="match_parent"
             android:padding="15dp"
             android:layout_marginTop="5dp"/>
         <EditText

@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,8 +34,9 @@ public class NewPartyActivity extends AppCompatActivity {
     EditText viewTitle;
     EditText viewPrice;
     EditText viewMemNum;
-    EditText viewCategory;
+    Spinner viewCategory;
     EditText viewContent;
+    String[] items = {"넷플릭스", "왓챠", "어도비", "디즈니+", "MS365"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +58,20 @@ public class NewPartyActivity extends AppCompatActivity {
         viewMemNum = findViewById(R.id.mem_num);
         viewCategory = findViewById(R.id.category);
         viewContent = findViewById(R.id.content);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, items);
 
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        viewCategory.setAdapter(adapter);
 
+        viewCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("category", String.valueOf(position));
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         Button btn = findViewById(R.id.btn);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +87,7 @@ public class NewPartyActivity extends AppCompatActivity {
         inputTitle = viewTitle.getText().toString();
         inputPrice = Integer.valueOf(viewPrice.getText().toString());
         inputMemNum = Integer.valueOf(viewMemNum.getText().toString());
-        inputCategory = Integer.valueOf(viewCategory.getText().toString());
+        inputCategory = Integer.valueOf(viewCategory.getSelectedItem().toString());
         inputContent = viewContent.getText().toString();
         Log.d("myapp", inputTitle);
         createParty(new PostingData("j", inputTitle, inputPrice, inputMemNum, inputCategory, inputContent));
