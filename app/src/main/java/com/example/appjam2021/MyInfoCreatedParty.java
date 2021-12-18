@@ -12,12 +12,12 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
-public class CreatedParty extends Fragment {
+public class MyInfoCreatedParty extends Fragment {
     ListView listview;
     ArrayList<String> title = new ArrayList<>();
     ArrayList<Integer> allMember = new ArrayList<>();
     ArrayList<Integer> currentMember = new ArrayList<>();
-    MyInfoPartyAdapter adapter;
+    MyInfoPartyCreatedAdapter adapter;
 
     @Nullable
     @Override
@@ -36,7 +36,7 @@ public class CreatedParty extends Fragment {
         currentMember.add(2);
         currentMember.add(2);
 
-        adapter = new MyInfoPartyAdapter(getContext(), title, allMember, currentMember);
+        adapter = new MyInfoPartyCreatedAdapter(getContext(), title, allMember, currentMember);
         listview.setAdapter(adapter);
 
 

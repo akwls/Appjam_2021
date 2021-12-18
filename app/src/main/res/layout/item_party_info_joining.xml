@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="17sp"
+    android:background="#fff">
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="김정우내꺼"
+        android:layout_centerVertical="true" />
+    <ImageView
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/txtName"
+        android:layout_marginLeft="15dp"
+        android:layout_width="40dp"
+        android:id="@+id/imgProfile"
+        android:layout_height="40dp"
+        android:src="@drawable/icon_netflix"
+        android:background="@drawable/circle" />
+    <LinearLayout
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="입금요청"
+            android:id="@+id/txtRequestMoney"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="14sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" | "
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="14sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtAsk"
+            android:text="문의하기"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

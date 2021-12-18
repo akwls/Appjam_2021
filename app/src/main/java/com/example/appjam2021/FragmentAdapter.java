@@ -10,8 +10,8 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     private ArrayList<Fragment> fragmentList = new ArrayList<>();
     public FragmentAdapter(FragmentManager fm) {
         super(fm);
-        fragmentList.add(new CreatedParty());
-        fragmentList.add(new JoinedParty());
+        fragmentList.add(new MyInfoCreatedParty());
+        fragmentList.add(new MyInfoJoinedParty());
     }
     @Override
     public Fragment getItem(int position) {

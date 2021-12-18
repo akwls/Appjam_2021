@@ -62,5 +62,26 @@
         android:textColor="#000"
         android:gravity="center"
         android:padding="10dp" />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/joining"
+        android:dividerHeight="5dp"
+        android:divider="#EFEFEF" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="참여 희망 회원"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="#000"
+        android:gravity="center"
+        android:padding="10dp" />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/wishing"
+        android:dividerHeight="5dp"
+        android:divider="#EFEFEF" />
 
 </LinearLayout>

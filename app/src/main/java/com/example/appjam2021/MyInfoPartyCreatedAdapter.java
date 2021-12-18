@@ -7,19 +7,18 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MyInfoPartyAdapter extends BaseAdapter {
+public class MyInfoPartyCreatedAdapter extends BaseAdapter {
     Context mContext;
-   ArrayList<String> title;
-   ArrayList<Integer> allMember;
-   ArrayList<Integer> currentMember;
+    ArrayList<String> title;
+    ArrayList<Integer> allMember;
+    ArrayList<Integer> currentMember;
 
-    public MyInfoPartyAdapter(Context mContext, ArrayList<String> title, ArrayList<Integer> allMember, ArrayList<Integer> currentMember) {
+    public MyInfoPartyCreatedAdapter(Context mContext, ArrayList<String> title, ArrayList<Integer> allMember, ArrayList<Integer> currentMember) {
         this.mContext = mContext;
         this.title = title;
         this.allMember = allMember;
@@ -54,6 +53,14 @@ public class MyInfoPartyAdapter extends BaseAdapter {
         recyclerView.setAdapter(adapter);
 
         txtTitle.setText(title.get(i));
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), MyInfoPartyInfoActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
 
 
         return view;
