@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     public static MainActivity mainActivity;
     private Api service;
     static int k = 0;
-    public static int category;
+    public static int category = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         if(ma != null) ma.finish();
         mainActivity = this;
         recyclerView = findViewById(R.id.recyclerView);
+        imgId.add(R.drawable.refresh);
         imgId.add(R.drawable.icon_netflix);
         imgId.add(R.drawable.icon_watcha);
         imgId.add(R.drawable.icon_laftel);
@@ -81,8 +82,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             }
         });
 
-        category = -1;
         Log.d("myapp", String.valueOf(category));
+        onRefresh();
         getList(category);
 
     }
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Override
     public void onRefresh() {
         getList(category);
+        Log.d("category", String.valueOf(category));
         swipeRefreshLayout.setRefreshing(false);
     }
 
@@ -104,13 +106,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     List<PartyList> result = response.body();
                     for (PartyList info : result) {
                         party = new Party(info.getOrganizer(), info.getTitle(), info.getMatching_num(), 2, info.getPrice(), info.getId(), info.getContent(), 0);
+                        partyList.add(party);
 
-                        if(category == -1) {
-                            partyList.add(party);
-                        }
-                        else {
-                            if(party.category == category) partyList.add(party);
-                        }
                         Log.d("myapp", info.getOrganizer());
                     }
                     Log.d("myapp", "partyList : " + partyList);
