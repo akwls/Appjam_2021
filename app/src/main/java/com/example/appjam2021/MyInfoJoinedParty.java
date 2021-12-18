@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
-public class JoinedParty extends Fragment {
+public class MyInfoJoinedParty extends Fragment {
     ListView listview;
     ArrayList<String> title = new ArrayList<>();
     ArrayList<Integer> allMember = new ArrayList<>();
