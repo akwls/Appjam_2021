@@ -16,6 +16,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     LoginActivity la = null;
+    MoreInfoActivity ma = null;
     RecyclerView recyclerView;
     MainCircleAdapter adapter;
     ListView mList;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         la = (LoginActivity)LoginActivity.loginActivity;
         if(la != null) la.finish();
+        ma = (MoreInfoActivity)MoreInfoActivity.moreInfoActivity;
+        if(ma != null) ma.finish();
         recyclerView = findViewById(R.id.recyclerView);
         imgId.add(R.drawable.icon_netflix);
         imgId.add(R.drawable.icon_watcha);
@@ -46,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MyInfoActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        txtNewParty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), NewPartyActivity.class);
                 startActivity(intent);
             }
         });

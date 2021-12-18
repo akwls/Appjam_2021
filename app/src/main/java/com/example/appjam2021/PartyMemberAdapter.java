@@ -55,6 +55,6 @@ public class PartyMemberAdapter extends RecyclerView.Adapter<PartyMemberAdapter.
 
     @Override
     public int getItemCount() {
-        return 0;
+        return allMember;
     }
 }

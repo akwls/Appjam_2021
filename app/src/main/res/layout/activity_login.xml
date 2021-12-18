@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="#fff">
     <TextView
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
@@ -33,7 +34,7 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="인증하기"
+        android:text="로그인"
         android:textColor="#fff"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -45,24 +46,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="로그인 오류가 발생하셨나요?"
+        android:text="이메일 인증하고 가입하기"
         android:textColor="#000"
         android:textSize="14sp"
-        android:id="@+id/txtLoginError"
+        android:textStyle="bold"
+        android:id="@+id/txtJoin"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/btnLogin"
         android:layout_marginBottom="28dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="인증 링크 재발송"
-        android:textColor="#000"
-        android:textSize="14sp"
-        android:id="@+id/txtLoginCode"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/txtLoginError"
-        android:layout_marginBottom="20dp"/>
+
 
 
 
