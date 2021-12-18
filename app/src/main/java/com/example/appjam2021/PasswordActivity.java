@@ -87,7 +87,7 @@ public class PasswordActivity extends AppCompatActivity {
                 if(result.getCode() == 200) {
                     UserInfo.setId(result.getId());
                     UserInfo.setName(result.getName());
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MoreInfoActivity.class);
                     startActivity(intent);
                 }
             }
