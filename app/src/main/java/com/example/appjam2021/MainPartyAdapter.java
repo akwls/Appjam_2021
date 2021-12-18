@@ -1,6 +1,7 @@
 package com.example.appjam2021;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,7 @@ public class MainPartyAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int i, View view, final ViewGroup viewGroup) {
        if(view == null) {
            view = View.inflate(mContext, R.layout.item_main_party, null);
        }
@@ -59,6 +60,14 @@ public class MainPartyAdapter extends BaseAdapter {
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
         adapter = new PartyMemberAdapter(party.get(i).AllMember, party.get(i).currentMember, view.getContext());
         recyclerView.setAdapter(adapter);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), PartyJoinActivity.class);
+                viewGroup.getContext().startActivity(intent);
+            }
+        });
 
         return view;
     }

@@ -49,6 +49,7 @@ public class PartyMemberAdapter extends RecyclerView.Adapter<PartyMemberAdapter.
         holder.itemView.setTag(position);
         if(position < currentMember) {
             holder.img.setVisibility(View.VISIBLE);
+            holder.img.setClipToOutline(true);
             holder.img.setImageResource(imgId[position]);
         }
     }

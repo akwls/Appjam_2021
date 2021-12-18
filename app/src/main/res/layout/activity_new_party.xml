@@ -55,6 +55,17 @@
             android:hint="카테고리"
             android:padding="15dp"
             android:layout_marginTop="5dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:textSize="14sp"
+            android:textColor="#000"
+            android:gravity="center"
+            android:background="#fff"
+            android:hint="상세 설명"
+            android:padding="15dp"
+            android:inputType="text|textMultiLine"
+            android:layout_marginTop="5dp"/>
     </LinearLayout>
     <Button
         android:layout_width="match_parent"
