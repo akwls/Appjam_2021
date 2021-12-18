@@ -2,6 +2,7 @@ package com.example.appjam2021;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ public class MainPartyAdapter extends BaseAdapter {
        TextView price = view.findViewById(R.id.txtPrice);
         TextView member = view.findViewById(R.id.txtMember);
 
+        Log.d("myapp", party.get(i).name);
         name.setText(party.get(i).name +"님의 파티");
         title.setText(party.get(i).title);
         price.setText("월 " +party.get(i).price+"원");

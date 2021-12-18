@@ -6,13 +6,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.appjam2021.network.Api;
+import com.example.appjam2021.network.RetrofitClient;
+import com.example.appjam2021.party.PartyList;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     LoginActivity la = null;
@@ -26,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     TextView txtNewParty, txtMyInfo;
     ArrayList<Integer> imgId = new ArrayList<>();
 
+    private Api service;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,15 +72,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        for(int i=0; i<5; i++) {
-            party = new Party("홍길동", "넷플릭스 파티원 찾아요!~", 5, 2, 4900);
-            partyList.add(party);
-        }
-        partyAdapter = new MainPartyAdapter(getApplicationContext(), partyList);
-        mList.setAdapter(partyAdapter);
+        int category = 0;
+        service = RetrofitClient.getClient().create(Api.class);
+        Call<List<PartyList>> call = service.listData(category);
+        call.enqueue(new Callback<List<PartyList>>() {
+            @Override
+            public void onResponse(Call<List<PartyList>> call, Response<List<PartyList>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<PartyList> result = response.body();
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-        adapter = new MainCircleAdapter(imgId, getApplicationContext());
-        recyclerView.setAdapter(adapter);
+                    for (PartyList info : result) {
+                        party = new Party(info.getOrganizer(), info.getTitle(), info.getMatching_num(), 2, info.getPrice(), info.getId());
+                        partyList.add(party);
+                        Log.d("myapp", info.getOrganizer());
+                    }
+                    Log.d("myapp", "partyList : " + partyList);
+                    partyAdapter = new MainPartyAdapter(getApplicationContext(), partyList);
+                    mList.setAdapter(partyAdapter);
+
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                    adapter = new MainCircleAdapter(imgId, getApplicationContext());
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    Log.d("myapp", "question - else err");
+                    Log.d("myapp", response.errorBody().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PartyList>> call, Throwable t) {
+                Log.d("myapp", "question - Failure error");
+                Log.e("myapp", "에러 : " + t.getMessage());
+                Toast.makeText(getApplicationContext(), "인터넷 연결이 필요합니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 }
