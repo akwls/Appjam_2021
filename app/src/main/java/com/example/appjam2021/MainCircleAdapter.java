@@ -56,6 +56,8 @@ public class MainCircleAdapter extends RecyclerView.Adapter<MainCircleAdapter.Vi
             @Override
             public void onClick(View view) {
                 Log.d("main Circle", position+"번째 클릭됐어요~~");
+                MainActivity.category = position;
+                MainActivity.mainActivity.onRefresh();
                 // holder.linear.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#C4C4C4")));
             }
         });

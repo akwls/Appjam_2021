@@ -8,6 +8,7 @@ public class Party {
     int price;
     String id;
     String content;
+    int category;
 
     public String getName() {
         return name;
@@ -65,7 +66,7 @@ public class Party {
         this.price = price;
     }
 
-    public Party(String name, String title, int allMember, int currentMember, int price, String id, String content) {
+    public Party(String name, String title, int allMember, int currentMember, int price, String id, String content, int category) {
         this.name = name;
         this.title = title;
         AllMember = allMember;
@@ -73,5 +74,6 @@ public class Party {
         this.price = price;
         this.id = id;
         this.content = content;
+        this.category = category;
     }
 }

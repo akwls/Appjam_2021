@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.appjam2021.user.UserInfo;
 import com.google.android.material.tabs.TabLayout;
 
 public class MyInfoActivity extends AppCompatActivity {
@@ -18,6 +19,7 @@ public class MyInfoActivity extends AppCompatActivity {
     TextView toolbar_title;
     ImageView imgProfile;
     ImageButton btnBack;
+    TextView txtName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,8 @@ public class MyInfoActivity extends AppCompatActivity {
                 finish();
             }
         });
+        txtName = findViewById(R.id.txtName);
+        txtName.setText(UserInfo.getName());
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

@@ -3,6 +3,7 @@ package com.example.appjam2021;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +27,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     LoginActivity la = null;
     MoreInfoActivity ma = null;
     RecyclerView recyclerView;
@@ -37,8 +38,11 @@ public class MainActivity extends AppCompatActivity {
     Party party;
     TextView txtNewParty, txtMyInfo;
     ArrayList<Integer> imgId = new ArrayList<>();
+    SwipeRefreshLayout swipeRefreshLayout;
+    public static MainActivity mainActivity;
     private Api service;
     static int k = 0;
+    public static int category;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         if(la != null) la.finish();
         ma = (MoreInfoActivity)MoreInfoActivity.moreInfoActivity;
         if(ma != null) ma.finish();
+        mainActivity = this;
         recyclerView = findViewById(R.id.recyclerView);
         imgId.add(R.drawable.icon_netflix);
         imgId.add(R.drawable.icon_watcha);
@@ -57,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         partyList = new ArrayList<>();
         txtNewParty = findViewById(R.id.txtNewParty);
         txtMyInfo = findViewById(R.id.txtMyinfo);
+        swipeRefreshLayout = findViewById(R.id.swipeLayout);
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         txtMyInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,24 +81,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        int category = 0;
+        category = -1;
         Log.d("myapp", String.valueOf(category));
         getList(category);
 
     }
-    public void getList(int category){
+
+    @Override
+    public void onRefresh() {
+        getList(category);
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    public void getList(final int category){
         service = RetrofitClient.getClient().create(Api.class);
         Call<List<PartyList>> call = service.listData(category);
         call.enqueue(new Callback<List<PartyList>>() {
             @Override
             public void onResponse(Call<List<PartyList>> call, Response<List<PartyList>> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    partyList.clear();
                     List<PartyList> result = response.body();
-
                     for (PartyList info : result) {
-                        party = new Party(info.getOrganizer(), info.getTitle(), info.getMatching_num(), 2, info.getPrice(), info.getId(), info.getContent());
+                        party = new Party(info.getOrganizer(), info.getTitle(), info.getMatching_num(), 2, info.getPrice(), info.getId(), info.getContent(), 0);
 
-                        partyList.add(party);
+                        if(category == -1) {
+                            partyList.add(party);
+                        }
+                        else {
+                            if(party.category == category) partyList.add(party);
+                        }
                         Log.d("myapp", info.getOrganizer());
                     }
                     Log.d("myapp", "partyList : " + partyList);
@@ -115,4 +134,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

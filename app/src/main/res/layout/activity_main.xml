@@ -69,11 +69,17 @@
         </androidx.recyclerview.widget.RecyclerView>
     </androidx.core.widget.NestedScrollView>
 
-    <ListView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/list"
-        android:dividerHeight="5dp"
-        android:divider="#EFEFEF" />
+        android:layout_height="wrap_content">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/list"
+            android:dividerHeight="5dp"
+            android:divider="#EFEFEF" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 </LinearLayout>

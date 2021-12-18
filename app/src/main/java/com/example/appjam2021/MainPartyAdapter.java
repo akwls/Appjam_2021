@@ -73,6 +73,7 @@ public class MainPartyAdapter extends BaseAdapter {
                 intent.putExtra("AllMember", party.get(i).AllMember);
                 intent.putExtra("content", party.get(i).content);
                 viewGroup.getContext().startActivity(intent);
+
             }
         });
 
