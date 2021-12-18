@@ -24,6 +24,7 @@ public class PartyJoinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_party_join);
         toolbar_title = findViewById(R.id.toolbar_title);
+        toolbar_title.setText("파티 가입");
         btnBack = findViewById(R.id.btnBack);
         name = findViewById(R.id.txtName);
         title = findViewById(R.id.txtTitle);
