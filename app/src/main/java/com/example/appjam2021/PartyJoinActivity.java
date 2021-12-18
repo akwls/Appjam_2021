@@ -84,7 +84,7 @@ public class PartyJoinActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<PartyJoinResponse> call, Response<PartyJoinResponse> response) {
                 PartyJoinResponse result = response.body();
-                Toast.makeText(PartyJoinActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PartyJoinActivity.this, result.getMessage(), Toast.LENGTH_LONG).show();
                 if (result.getCode() == 200) {
                     //액티비티 종료
                     finish();
