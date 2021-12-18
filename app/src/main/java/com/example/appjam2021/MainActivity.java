@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class MainActivity extends AppCompatActivity {
     LoginActivity la = null;
     MoreInfoActivity ma = null;
@@ -35,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
     Party party;
     TextView txtNewParty, txtMyInfo;
     ArrayList<Integer> imgId = new ArrayList<>();
-
     private Api service;
+    static int k = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +75,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         int category = 0;
+        Log.d("myapp", String.valueOf(category));
+        getList(category);
+
+    }
+    public void getList(int category){
         service = RetrofitClient.getClient().create(Api.class);
         Call<List<PartyList>> call = service.listData(category);
         call.enqueue(new Callback<List<PartyList>>() {
@@ -83,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
                     for (PartyList info : result) {
                         party = new Party(info.getOrganizer(), info.getTitle(), info.getMatching_num(), 2, info.getPrice(), info.getId());
+
                         partyList.add(party);
                         Log.d("myapp", info.getOrganizer());
                     }
@@ -106,7 +114,5 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "인터넷 연결이 필요합니다.", Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 }
