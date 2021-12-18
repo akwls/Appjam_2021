@@ -45,39 +45,7 @@ public class PartyJoinActivity extends AppCompatActivity {
         txtDescription = findViewById(R.id.txtDescription);
 
         Api service = RetrofitClient.getClient().create(Api.class);
-        Call<List<PartyList>> call = service.listData(category);
-        call.enqueue(new Callback<List<PartyList>>() {
-            @Override
-            public void onResponse(Call<List<PartyList>> call, Response<List<PartyList>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<PartyList> result = response.body();
 
-                    for (PartyList info : result) {
-                        party = new Party(info.getOrganizer(), info.getTitle(), info.getMatching_num(), 2, info.getPrice(), info.getId());
-
-                        partyList.add(party);
-                        Log.d("myapp", info.getOrganizer());
-                    }
-                    Log.d("myapp", "partyList : " + partyList);
-                    partyAdapter = new MainPartyAdapter(getApplicationContext(), partyList);
-                    mList.setAdapter(partyAdapter);
-
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                    adapter = new MainCircleAdapter(imgId, getApplicationContext());
-                    recyclerView.setAdapter(adapter);
-                } else {
-                    Log.d("myapp", "question - else err");
-                    Log.d("myapp", response.errorBody().toString());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<PartyList>> call, Throwable t) {
-                Log.d("myapp", "question - Failure error");
-                Log.e("myapp", "에러 : " + t.getMessage());
-                Toast.makeText(getApplicationContext(), "인터넷 연결이 필요합니다.", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         name.setText("홍길동" +"님의 파티");
         title.setText("어쩌구");
