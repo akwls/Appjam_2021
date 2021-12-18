@@ -1,0 +1,19 @@
+package com.example.appjam2021.party;
+
+import com.google.gson.annotations.SerializedName;
+
+public class PartyJoinResponse {
+    @SerializedName("code")
+    private int code;
+
+    @SerializedName("message")
+    private String message;
+
+    public int getCode() {
+        return code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+}

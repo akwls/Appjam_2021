@@ -7,6 +7,7 @@ public class Party {
     int currentMember;
     int price;
     String id;
+    String content;
 
     public String getName() {
         return name;
@@ -14,6 +15,14 @@ public class Party {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String name) {
+        this.content = content;
     }
 
     public String getId() {
@@ -56,12 +65,13 @@ public class Party {
         this.price = price;
     }
 
-    public Party(String name, String title, int allMember, int currentMember, int price, String id) {
+    public Party(String name, String title, int allMember, int currentMember, int price, String id, String content) {
         this.name = name;
         this.title = title;
         AllMember = allMember;
         this.currentMember = currentMember;
         this.price = price;
         this.id = id;
+        this.content = content;
     }
 }

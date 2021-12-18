@@ -1,5 +1,7 @@
 package com.example.appjam2021.network;
 
+import com.example.appjam2021.party.PartyJoinData;
+import com.example.appjam2021.party.PartyJoinResponse;
 import com.example.appjam2021.party.PartyList;
 import com.example.appjam2021.user.JoinData;
 import com.example.appjam2021.user.JoinInfoData;
@@ -31,4 +33,7 @@ public interface Api {
     @GET("/list/category/{category}")
     public Call<List<PartyList>> listData(@Path("category") int category);
 
+    // 파티 가입
+    @POST("/party-user/applicant")
+    public Call<PartyJoinResponse> partyJoin(@Body PartyJoinData data);
 }

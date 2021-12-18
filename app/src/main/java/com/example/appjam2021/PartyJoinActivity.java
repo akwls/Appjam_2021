@@ -4,15 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.appjam2021.network.Api;
 import com.example.appjam2021.network.RetrofitClient;
+import com.example.appjam2021.party.PartyJoinData;
+import com.example.appjam2021.party.PartyJoinResponse;
 import com.example.appjam2021.party.PartyList;
 
 import java.util.List;
@@ -30,28 +34,26 @@ public class PartyJoinActivity extends AppCompatActivity {
     TextView member;
     TextView txtDescription;
     PartyMemberAdapter adapter;
+    Button btn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_party_join);
         toolbar_title = findViewById(R.id.toolbar_title);
-        toolbar_title.setText("파티 가입");
         btnBack = findViewById(R.id.btnBack);
         name = findViewById(R.id.txtName);
         title = findViewById(R.id.txtTitle);
         price = findViewById(R.id.txtPrice);
         member = findViewById(R.id.txtMember);
         txtDescription = findViewById(R.id.txtDescription);
-
-        Api service = RetrofitClient.getClient().create(Api.class);
-
-
-        name.setText("홍길동" +"님의 파티");
-        title.setText("어쩌구");
-        price.setText("월 " +4900+"원");
-        member.setText(2+ "/" + 5);
-        txtDescription.setText("어쩌구어쩌구");
+        final Intent intent = new Intent(this.getIntent());
+        name.setText(intent.getStringExtra("name") +"님의 파티");
+        title.setText(intent.getStringExtra("title"));
+        price.setText("월 " + String.valueOf(intent.getIntExtra("price", 1)) +"원");
+        member.setText(intent.getIntExtra("currentMember", 1)+ "/" + intent.getIntExtra("AllMember", 1));
+        txtDescription.setText(intent.getStringExtra("content"));
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -66,6 +68,37 @@ public class PartyJoinActivity extends AppCompatActivity {
             }
         });
         toolbar_title.setText("파티 가입");
+        final String room = intent.getStringExtra("name");
+        btn = findViewById(R.id.join_btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                partyJoin(new PartyJoinData("1", room));
+            }
+        });
+    }
 
+    private void partyJoin(PartyJoinData data){
+       Api service = RetrofitClient.getClient().create(Api.class);
+        service.partyJoin(data).enqueue(new Callback<PartyJoinResponse>() {
+            @Override
+            public void onResponse(Call<PartyJoinResponse> call, Response<PartyJoinResponse> response) {
+                PartyJoinResponse result = response.body();
+                Toast.makeText(PartyJoinActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
+                if (result.getCode() == 200) {
+                    //액티비티 종료
+                    finish();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PartyJoinResponse> call, Throwable t) {
+                Toast.makeText(PartyJoinActivity.this, "파티 가입 에러 발생", Toast.LENGTH_SHORT).show();
+                Log.e("파티 가입 에러 발생", t.getMessage());
+                t.printStackTrace();
+            }
+
+        });
     }
 }

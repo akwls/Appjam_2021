@@ -13,11 +13,15 @@ public class PartyList {
     private int price;
     @SerializedName("matching_num")
     private int matching_num;
+    @SerializedName("content")
+    private String content;
 
     public String getOrganizer() {
         return organizer;
     }
-
+    public String getContent() {
+        return content;
+    }
     public String getId() {
         return id;
     }

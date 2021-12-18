@@ -84,6 +84,7 @@
         android:gravity="center"
         android:text="설명" />
     <Button
+        android:id="@+id/join_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="참여 요청하기"

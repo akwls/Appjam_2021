@@ -42,17 +42,16 @@ public class MainPartyAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, final ViewGroup viewGroup) {
+    public View getView(final int i, View view, final ViewGroup viewGroup) {
        if(view == null) {
            view = View.inflate(mContext, R.layout.item_main_party, null);
        }
        PartyMemberAdapter adapter;
-        TextView name = view.findViewById(R.id.txtName);
+        final TextView name = view.findViewById(R.id.txtName);
        TextView title = view.findViewById(R.id.txtTitle);
        TextView price = view.findViewById(R.id.txtPrice);
         TextView member = view.findViewById(R.id.txtMember);
 
-        Log.d("myapp", party.get(i).name);
         name.setText(party.get(i).name +"님의 파티");
         title.setText(party.get(i).title);
         price.setText("월 " +party.get(i).price+"원");
@@ -67,6 +66,12 @@ public class MainPartyAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), PartyJoinActivity.class);
+                intent.putExtra("name", party.get(i).name);
+                intent.putExtra("title", party.get(i).title);
+                intent.putExtra("price", party.get(i).price);
+                intent.putExtra("currentMember", party.get(i).currentMember);
+                intent.putExtra("AllMember", party.get(i).AllMember);
+                intent.putExtra("content", party.get(i).content);
                 viewGroup.getContext().startActivity(intent);
             }
         });

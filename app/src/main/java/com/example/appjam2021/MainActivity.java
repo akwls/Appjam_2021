@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     List<PartyList> result = response.body();
 
                     for (PartyList info : result) {
-                        party = new Party(info.getOrganizer(), info.getTitle(), info.getMatching_num(), 2, info.getPrice(), info.getId());
+                        party = new Party(info.getOrganizer(), info.getTitle(), info.getMatching_num(), 2, info.getPrice(), info.getId(), info.getContent());
 
                         partyList.add(party);
                         Log.d("myapp", info.getOrganizer());
